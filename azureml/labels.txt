@@ -1,0 +1,8 @@
+buoy
+cruise
+ferry
+freight
+gondola
+kayak
+Negative
+sail
