@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "pingModule Remote Debug (Node.js)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceRoot}/modules/pingModule",
+      "remoteRoot": "/app",
+      "protocol": "inspector"
+    },
+    {
+      "name": "pingModule Local Debug (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/modules/pingModule/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+      }
+    },
+    {
+      "name": "pongModule Remote Debug (Node.js)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceRoot}/modules/pongModule",
+      "remoteRoot": "/app",
+      "protocol": "inspector"
+    },
+    {
+      "name": "pongModule Local Debug (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/modules/pongModule/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+      }
+    }
+  ]
+}
