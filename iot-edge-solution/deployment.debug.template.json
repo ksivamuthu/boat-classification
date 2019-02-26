@@ -96,6 +96,29 @@
                 }
               }
             }
+          },
+          "temperatureSensor": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.temperatureSensor.debug}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "9231/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "9231/tcp": [
+                      {
+                        "HostPort": "9231"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -104,8 +127,7 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "pingModuleToPongModule": "FROM /messages/modules/pingModule/outputs/* INTO BrokeredEndpoint(\"/modules/pongModule/inputs/pingInput\")",
-          "pongModuleToIoTHub": "FROM /messages/modules/pongModule/outputs/* INTO $upstream"
+          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

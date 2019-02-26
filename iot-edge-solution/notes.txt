@@ -1,0 +1,2 @@
+          "pingModuleToPongModule": "FROM /messages/modules/pingModule/outputs/* INTO BrokeredEndpoint(\"/modules/pongModule/inputs/pingInput\")",
+          // "pongModuleToIoTHub": "FROM /messages/modules/pongModule/outputs/* INTO $upstream"

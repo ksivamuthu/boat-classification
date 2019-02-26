@@ -42,6 +42,27 @@
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
         "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
       }
+    },
+    {
+      "name": "temperatureSensor Remote Debug (Node.js)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceRoot}/modules/temperatureSensor",
+      "remoteRoot": "/app",
+      "protocol": "inspector"
+    },
+    {
+      "name": "temperatureSensor Local Debug (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/modules/temperatureSensor/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+      }
     }
   ]
 }

@@ -70,6 +70,16 @@
               "image": "${MODULES.pongModule}",
               "createOptions": {}
             }
+          },
+          "temperatureSensor": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.temperatureSensor}",
+              "createOptions": {}
+            }
           }
         }
       }
@@ -78,8 +88,7 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "pingModuleToPongModule": "FROM /messages/modules/pingModule/outputs/* INTO BrokeredEndpoint(\"/modules/pongModule/inputs/pingInput\")",
-          "pongModuleToIoTHub": "FROM /messages/modules/pongModule/outputs/* INTO $upstream"
+          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
