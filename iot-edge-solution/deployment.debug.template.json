@@ -119,6 +119,29 @@
                 }
               }
             }
+          },
+          "dashboard": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.dashboard.debug}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "9229/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "9229/tcp": [
+                      {
+                        "HostPort": "9229"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -127,7 +150,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream"
+          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream",
+          "dashboardToIoTHub": "FROM /messages/modules/dashboard/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
