@@ -1,10 +1,14 @@
+<p align="center">
+  <img width="120" height=120" src="http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42575-sailboat-icon.png"/>
+</p>
+
 # Boat Watch - Azure IoT Edge
 
 Boat watch - this repository contains reference IoT Edge solution that watches boat and finds the boat classification types such as cruise, ferry, gondola, sail or kayak, etc. Not limited to it, it also includes the sending sensor data such as temperature, humidity, etc., stream analytics and azure functions.
 
 This sample can be deployed in raspberry pi and also on an x64 machine/ simulator.
 
-Check out this twitch stream to see development in action and join me on this voyage.
+Check out this twitch stream (https://twitch.tv/ksivamuthu) to see development in action and join me on this voyage.
 
 ## Prerequisites
 
