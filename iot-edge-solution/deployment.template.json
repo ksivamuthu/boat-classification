@@ -51,26 +51,6 @@
           }
         },
         "modules": {
-          "pingModule": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.pingModule}",
-              "createOptions": {}
-            }
-          },
-          "pongModule": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.pongModule}",
-              "createOptions": {}
-            }
-          },
           "temperatureSensor": {
             "version": "1.0",
             "type": "docker",
@@ -103,6 +83,16 @@
                 }
               }
             }
+          },
+          "filterSensorData": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.filterSensorData}",
+              "createOptions": {}
+            }
           }
         }
       }
@@ -111,8 +101,9 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream",
-          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/temperatureInput\")"
+          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/temperatureInput\")",
+          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/temperatureInput\")",
+          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

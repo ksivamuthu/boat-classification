@@ -2,52 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "pingModule Remote Debug (Node.js)",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "localhost",
-      "localRoot": "${workspaceRoot}/modules/pingModule",
-      "remoteRoot": "/app",
-      "protocol": "inspector"
-    },
-    {
-      "name": "pingModule Local Debug (Node.js)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceRoot}/modules/pingModule/app.js",
-      "console": "integratedTerminal",
-      "env": {
-        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
-        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
-      }
-    },
-    {
-      "name": "pongModule Remote Debug (Node.js)",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "localhost",
-      "localRoot": "${workspaceRoot}/modules/pongModule",
-      "remoteRoot": "/app",
-      "protocol": "inspector"
-    },
-    {
-      "name": "pongModule Local Debug (Node.js)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceRoot}/modules/pongModule/app.js",
-      "console": "integratedTerminal",
-      "env": {
-        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
-        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
-      }
-    },
-    {
       "name": "temperatureSensor Remote Debug (Node.js)",
       "type": "node",
       "request": "attach",
-      "port": 9229,
+      "port": 9231,
       "address": "localhost",
       "localRoot": "${workspaceRoot}/modules/temperatureSensor",
       "remoteRoot": "/app",
@@ -63,7 +21,7 @@
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
         "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
       }
-    },
+    },  
     {
       "name": "dashboard Remote Debug (Node.js)",
       "type": "node",
@@ -86,20 +44,20 @@
       }
     },
     {
-      "name": "dashboard Remote Debug (Node.js)",
+      "name": "filterSensorData Remote Debug (Node.js)",
       "type": "node",
       "request": "attach",
-      "port": 9229,
+      "port": 9230,
       "address": "localhost",
-      "localRoot": "${workspaceRoot}/modules/dashboard",
+      "localRoot": "${workspaceRoot}/modules/filterSensorData",
       "remoteRoot": "/app",
       "protocol": "inspector"
     },
     {
-      "name": "dashboard Local Debug (Node.js)",
+      "name": "filterSensorData Local Debug (Node.js)",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/modules/dashboard/app.js",
+      "program": "${workspaceRoot}/modules/filterSensorData/app.js",
       "console": "integratedTerminal",
       "env": {
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",

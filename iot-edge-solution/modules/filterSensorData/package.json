@@ -1,5 +1,5 @@
 {
-    "name": "pong-module",
+    "name": "filter-sensor-data",
     "version": "0.0.1",
     "dependencies": {
         "azure-iot-device": "^1.7.0",

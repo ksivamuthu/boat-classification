@@ -4,6 +4,9 @@ var Transport = require('azure-iot-device-mqtt').Mqtt;
 var Client = require('azure-iot-device').ModuleClient;
 var Message = require('azure-iot-device').Message;
 
+const TEMPERATURE_LOW_THRESHOLD = 20;
+const TEMPERATURE_HIGH_THRESHOLD = 70;
+
 Client.fromEnvironment(Transport, function (err, client) {
   if (err) {
     throw err;
@@ -32,11 +35,16 @@ Client.fromEnvironment(Transport, function (err, client) {
 function pipeMessage(client, inputName, msg) {
   client.complete(msg, printResultFor('Receiving message'));
 
-  if (inputName === 'pingInput') {
+  if (inputName === 'temperatureInput') {
     var message = msg.getBytes().toString('utf8');
     if (message) {
-      var outputMsg = new Message(message);
-      client.sendOutputEvent('output1', outputMsg, printResultFor('Sending received message'));
+      const data = JSON.parse(message);
+      if(data.temperature) {
+         if(data.temperature <=TEMPERATURE_LOW_THRESHOLD  || data.temperature >=TEMPERATURE_HIGH_THRESHOLD) {
+          var outputMsg = new Message(message);
+          client.sendOutputEvent('output1', outputMsg, printResultFor('Sending received message'));
+         }
+      }      
     }
   }
 }

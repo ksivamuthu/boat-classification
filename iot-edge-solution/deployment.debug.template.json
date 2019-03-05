@@ -51,52 +51,6 @@
           }
         },
         "modules": {
-          "pingModule": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.pingModule.debug}",
-              "createOptions": {
-                "ExposedPorts": {
-                  "9229/tcp": {}
-                },
-                "HostConfig": {
-                  "PortBindings": {
-                    "9229/tcp": [
-                      {
-                        "HostPort": "9229"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "pongModule": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.pongModule.debug}",
-              "createOptions": {
-                "ExposedPorts": {
-                  "9229/tcp": {}
-                },
-                "HostConfig": {
-                  "PortBindings": {
-                    "9229/tcp": [
-                      {
-                        "HostPort": "9230"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
           "temperatureSensor": {
             "version": "1.0",
             "type": "docker",
@@ -129,13 +83,42 @@
               "image": "${MODULES.dashboard.debug}",
               "createOptions": {
                 "ExposedPorts": {
-                  "9229/tcp": {}
+                  "9229/tcp": {},
+                  "3001/tcp": {}
                 },
                 "HostConfig": {
                   "PortBindings": {
                     "9229/tcp": [
                       {
                         "HostPort": "9229"
+                      }
+                    ],
+                    "3001/tcp": [
+                      {
+                        "HostPort": "3001"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "filterSensorData": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.filterSensorData.debug}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "9230/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "9230/tcp": [
+                      {
+                        "HostPort": "9230"
                       }
                     ]
                   }
@@ -150,8 +133,9 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorToIoTHub": "FROM /messages/modules/temperatureSensor/outputs/* INTO $upstream",
-          "dashboardToIoTHub": "FROM /messages/modules/dashboard/outputs/* INTO $upstream"
+          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/temperatureInput\")",
+          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/temperatureInput\")",
+          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
