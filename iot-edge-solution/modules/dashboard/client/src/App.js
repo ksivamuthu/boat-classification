@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import socketIOClient from 'socket.io-client';
+import Button from '@material-ui/core/Button';
+import Temperature from './sensor-widgets/temperature/Temperature';
 
 class App extends Component {
   constructor() {
@@ -21,11 +23,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{this.state.temperature}</p>
-        </header>
+      <div>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />  
+        <div className="logo-container">
+          <img src={logo}></img>
+        </div>
+        <div className="dashboard-container">
+            <Temperature temperature={this.state.temperature}></Temperature>
+        </div>    
       </div>
     );
   }
