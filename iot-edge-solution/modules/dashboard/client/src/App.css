@@ -27,12 +27,17 @@
   margin: 20px;
 }
 
+.dashboard-container > div {
+  margin: 10px;
+  display: inline-block;
+}
+
 .logo-container {
   text-align:center;
 }
 
-.logo-container .img {
-  width: 150px;
+.logo-container img {
+  width: 100px;
 }
 
 @keyframes App-logo-spin {

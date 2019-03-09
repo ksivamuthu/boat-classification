@@ -133,8 +133,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/temperatureInput\")",
-          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/temperatureInput\")",
+          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/sensorInput\")",
+          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
           "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {

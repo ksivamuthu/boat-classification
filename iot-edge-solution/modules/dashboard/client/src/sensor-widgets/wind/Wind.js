@@ -17,7 +17,7 @@ const styles = {
       fontSize: 14,
     }
 };  
-class TemperatureWidget extends Component {
+class WindWidget extends Component {
     constructor(props) {
         super(props)
         console.log(props);
@@ -27,25 +27,26 @@ class TemperatureWidget extends Component {
       return <Card className={this.props.classes.card}>
         <CardContent>
           <Typography className={this.props.classes.title} color="textPrimary" gutterBottom>
-            Temperature
+            Wind
           </Typography>
           <hr/>
           <Grid container justify="center" alignItems="center">
             <Grid>              
-              <h2>{this.props.temperature}</h2>                  
+              <h2>{this.props.wind.speed}</h2>                  
             </Grid>
             <Grid>
-              <span>&nbsp;&#8457;</span>
+              <span>&nbsp;mph</span>
             </Grid>
           </Grid>
+          <span>{this.props.wind.direction}</span>        
         </CardContent>
       </Card>
     }
 }
 
-TemperatureWidget.propTypes = {
+WindWidget.propTypes = {
     classes: PropTypes.object.isRequired,
-    temperature: PropTypes.number.isRequired
+    wind: PropTypes.object.isRequired
 };
   
-export default withStyles(styles)(TemperatureWidget)
+export default withStyles(styles)(WindWidget)

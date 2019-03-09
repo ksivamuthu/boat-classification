@@ -38,10 +38,10 @@ Client.fromEnvironment(Transport, function (err, client) {
         console.log('IoT Hub module client initialized');
 
         client.on('inputMessage', function (inputName, msg) {
-          if(inputName === 'temperatureInput') {
+          if(inputName === 'sensorInput') {
             const data =  JSON.parse(msg.getBytes().toString('utf8'));
             console.log(data);
-            io.sockets.emit('temperatureInput', data);
+            io.sockets.emit('sensorInput', data);
           }
         });
       }

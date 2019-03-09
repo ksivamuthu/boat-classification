@@ -35,12 +35,12 @@ Client.fromEnvironment(Transport, function (err, client) {
 function pipeMessage(client, inputName, msg) {
   client.complete(msg, printResultFor('Receiving message'));
 
-  if (inputName === 'temperatureInput') {
+  if (inputName === 'sensorInput') {
     var message = msg.getBytes().toString('utf8');
     if (message) {
       const data = JSON.parse(message);
-      if(data.temperature) {
-         if(data.temperature <=TEMPERATURE_LOW_THRESHOLD  || data.temperature >=TEMPERATURE_HIGH_THRESHOLD) {
+      if(data.machine.temperature) {
+         if(data.machine.temperature <=TEMPERATURE_LOW_THRESHOLD  || data.machine.temperature >=TEMPERATURE_HIGH_THRESHOLD) {
           var outputMsg = new Message(message);
           client.sendOutputEvent('output1', outputMsg, printResultFor('Sending received message'));
          }
