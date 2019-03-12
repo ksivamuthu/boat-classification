@@ -93,6 +93,29 @@
               "image": "${MODULES.filterSensorData}",
               "createOptions": {}
             }
+          },
+          "boatClassifier": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.boatClassifier}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "3005/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "3005/tcp": [
+                      {
+                        "HostPort": "3005"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -103,7 +126,8 @@
         "routes": {
           "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/sensorInput\")",
           "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
-          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream"
+          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream",
+          "boatClassifierToIoTHub": "FROM /messages/modules/boatClassifier/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
