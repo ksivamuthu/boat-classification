@@ -1,0 +1,15 @@
+FROM node:8-alpine
+
+WORKDIR /app/
+
+COPY package*.json ./
+
+RUN npm install --production
+
+COPY app.js ./
+
+COPY test.jpg ./
+
+USER node
+
+CMD ["node", "app.js"]

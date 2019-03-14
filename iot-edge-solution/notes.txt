@@ -1,2 +1,9 @@
-          "pingModuleToPongModule": "FROM /messages/modules/pingModule/outputs/* INTO BrokeredEndpoint(\"/modules/pongModule/inputs/pingInput\")",
-          // "pongModuleToIoTHub": "FROM /messages/modules/pongModule/outputs/* INTO $upstream"
+Building Camera Module (Simulated)
+
+1. Mount test images directory into the container. CreateOptions - Deployment.template.json
+2. For every specific interval, pick random test image and call boatclassifier endpoint
+3. Once we get the prediction result, send the result to IoT hub and Dashboard
+
+"filtersensorToIoTHub": "FROM /messages/modules/filtersensor/outputs/* INTO $upstream",
+          "boatclassifierToIoTHub": "FROM /messages/modules/boatclassifier/outputs/* INTO $upstream",
+          "cameraToIoTHub": "FROM /messages/modules/camera/outputs/* INTO $upstream"

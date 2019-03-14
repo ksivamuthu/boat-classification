@@ -42,7 +42,7 @@ function pipeMessage(client, inputName, msg) {
       if(data.machine.temperature) {
          if(data.machine.temperature <=TEMPERATURE_LOW_THRESHOLD  || data.machine.temperature >=TEMPERATURE_HIGH_THRESHOLD) {
           var outputMsg = new Message(message);
-          client.sendOutputEvent('output1', outputMsg, printResultFor('Sending received message'));
+          // client.sendOutputEvent('output1', outputMsg, printResultFor('Sending received message'));
          }
       }      
     }

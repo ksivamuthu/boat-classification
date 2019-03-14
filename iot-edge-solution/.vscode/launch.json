@@ -2,20 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "temperatureSensor Remote Debug (Node.js)",
+      "name": "sensor Remote Debug (Node.js)",
       "type": "node",
       "request": "attach",
       "port": 9231,
       "address": "localhost",
-      "localRoot": "${workspaceRoot}/modules/temperatureSensor",
+      "localRoot": "${workspaceRoot}/modules/sensor",
       "remoteRoot": "/app",
       "protocol": "inspector"
     },
     {
-      "name": "temperatureSensor Local Debug (Node.js)",
+      "name": "sensor Local Debug (Node.js)",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/modules/temperatureSensor/app.js",
+      "program": "${workspaceRoot}/modules/sensor/app.js",
       "console": "integratedTerminal",
       "env": {
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
@@ -44,20 +44,20 @@
       }
     },
     {
-      "name": "filterSensorData Remote Debug (Node.js)",
+      "name": "filtersensor Remote Debug (Node.js)",
       "type": "node",
       "request": "attach",
       "port": 9230,
       "address": "localhost",
-      "localRoot": "${workspaceRoot}/modules/filterSensorData",
+      "localRoot": "${workspaceRoot}/modules/filtersensor",
       "remoteRoot": "/app",
       "protocol": "inspector"
     },
     {
-      "name": "filterSensorData Local Debug (Node.js)",
+      "name": "filtersensor Local Debug (Node.js)",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/modules/filterSensorData/app.js",
+      "program": "${workspaceRoot}/modules/filtersensor/app.js",
       "console": "integratedTerminal",
       "env": {
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
@@ -65,7 +65,7 @@
       }
     },
     {
-      "name": "boatClassifier Remote Debug (Python)",
+      "name": "boatclassifier Remote Debug (Python)",
       "type": "python",
       "request": "attach",
       "port": 5678,
@@ -74,17 +74,38 @@
       "redirectOutput": true,
       "pathMappings": [
         {
-          "localRoot": "${workspaceFolder}/modules/boatClassifier",
+          "localRoot": "${workspaceFolder}/modules/boatclassifier",
           "remoteRoot": "/app"
         }
       ],
       "windows": {
         "pathMappings": [
           {
-            "localRoot": "${workspaceFolder}\\modules\\boatClassifier",
+            "localRoot": "${workspaceFolder}\\modules\\boatclassifier",
             "remoteRoot": "/app"
           }
         ]
+      }
+    },
+    {
+      "name": "camera Remote Debug (Node.js)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceRoot}/modules/camera",
+      "remoteRoot": "/app",
+      "protocol": "inspector"
+    },
+    {
+      "name": "camera Local Debug (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/modules/camera/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
       }
     }
   ]

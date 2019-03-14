@@ -51,13 +51,13 @@
           }
         },
         "modules": {
-          "temperatureSensor": {
+          "sensor": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.temperatureSensor.debug}",
+              "image": "${MODULES.sensor.debug}",
               "createOptions": {
                 "ExposedPorts": {
                   "9231/tcp": {}
@@ -103,13 +103,13 @@
               }
             }
           },
-          "filterSensorData": {
+          "filtersensor": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.filterSensorData.debug}",
+              "image": "${MODULES.filtersensor.debug}",
               "createOptions": {
                 "ExposedPorts": {
                   "9230/tcp": {}
@@ -126,13 +126,13 @@
               }
             }
           },
-          "boatClassifier": {
+          "boatclassifier": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.boatClassifier.debug}",
+              "image": "${MODULES.boatclassifier.debug}",
               "createOptions": {
                 "ExposedPorts": {
                   "3005/tcp": {}
@@ -148,6 +148,29 @@
                 }
               }
             }
+          },
+          "camera": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.camera.debug}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "9229/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "9229/tcp": [
+                      {
+                        "HostPort": "9229"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -156,10 +179,11 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/sensorInput\")",
-          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
-          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream",
-          "boatClassifierToIoTHub": "FROM /messages/modules/boatClassifier/outputs/* INTO $upstream"
+          "sensorTofiltersensor": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/filtersensor/inputs/sensorInput\")",
+          "sensorToDashboard": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
+          "filtersensorToIoTHub": "FROM /messages/modules/filtersensor/outputs/* INTO $upstream",
+          "boatclassifierToIoTHub": "FROM /messages/modules/boatclassifier/outputs/* INTO $upstream",
+          "cameraToIoTHub": "FROM /messages/modules/camera/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

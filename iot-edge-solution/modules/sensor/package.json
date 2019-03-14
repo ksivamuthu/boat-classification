@@ -1,5 +1,5 @@
 {
-    "name": "temperatureSensor",
+    "name": "sensor",
     "version": "0.0.1",
     "dependencies": {
         "azure-iot-device": "^1.7.0",

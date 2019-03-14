@@ -51,13 +51,13 @@
           }
         },
         "modules": {
-          "temperatureSensor": {
+          "sensor": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.temperatureSensor}",
+              "image": "${MODULES.sensor}",
               "createOptions": {}
             }
           },
@@ -84,37 +84,38 @@
               }
             }
           },
-          "filterSensorData": {
+          "filtersensor": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.filterSensorData}",
+              "image": "${MODULES.filtersensor}",
               "createOptions": {}
             }
           },
-          "boatClassifier": {
+          "boatclassifier": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.boatClassifier}",
+              "image": "${MODULES.boatclassifier}",
               "createOptions": {
                 "ExposedPorts": {
-                  "3005/tcp": {}
-                },
-                "HostConfig": {
-                  "PortBindings": {
-                    "3005/tcp": [
-                      {
-                        "HostPort": "3005"
-                      }
-                    ]
-                  }
+                  "80/tcp": {}
                 }
               }
+            }
+          },
+          "camera": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.camera}",
+              "createOptions": {}
             }
           }
         }
@@ -124,10 +125,9 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "temperatureSensorTofilterSensorData": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/filterSensorData/inputs/sensorInput\")",
-          "temperatureSensorToDashboard": "FROM /messages/modules/temperatureSensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
-          "filterSensorDataToIoTHub": "FROM /messages/modules/filterSensorData/outputs/* INTO $upstream",
-          "boatClassifierToIoTHub": "FROM /messages/modules/boatClassifier/outputs/* INTO $upstream"
+          "sensorTofiltersensor": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/filtersensor/inputs/sensorInput\")",
+          "sensorToDashboard": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
+          "filtersensorToIoTHub": "FROM /messages/modules/filtersensor/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
