@@ -8,7 +8,7 @@ RUN npm install --production
 
 COPY app.js ./
 
-COPY test.jpg ./
+COPY data ./data/
 
 USER node
 

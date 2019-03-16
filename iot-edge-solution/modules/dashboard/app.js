@@ -42,6 +42,10 @@ Client.fromEnvironment(Transport, function (err, client) {
             const data =  JSON.parse(msg.getBytes().toString('utf8'));
             console.log(data);
             io.sockets.emit('sensorInput', data);
+          } else if(inputName === 'cameraInput') {
+            const data =  JSON.parse(msg.getBytes().toString('utf8'));
+            console.log(data);
+            io.sockets.emit('cameraInput', data);
           }
         });
       }

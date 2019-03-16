@@ -4,6 +4,7 @@ import './App.css';
 import socketIOClient from 'socket.io-client';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import Temperature from './sensor-widgets/temperature/Temperature';
 import Pressure from './sensor-widgets/pressure/Pressure';
@@ -21,7 +22,9 @@ class App extends Component {
       wind:  {
         speed: '--',
         direction: '--'
-      }
+      },
+      tagName: '',
+      alert: false
     };
   }
 
@@ -38,6 +41,14 @@ class App extends Component {
         }
        });
     });
+
+    socket.on('cameraInput', (data) => {
+       this.setState({ alert: true, tagName: data.tagName });
+    });
+  }
+
+  handleClose () {
+    this.setState({ alert: false });
   }
 
   render() {
@@ -48,6 +59,14 @@ class App extends Component {
         <div className="logo-container">
           <img src={logo}></img>
         </div>
+        <Snackbar    
+          open={this.state.alert}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.tagName}</span>}
+        />
         <Grid container spacing="8" className="dashboard-container">
             <Grid>
                 <Temperature temperature={this.state.temperature}></Temperature>

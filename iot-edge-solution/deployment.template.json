@@ -127,7 +127,8 @@
         "routes": {
           "sensorTofiltersensor": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/filtersensor/inputs/sensorInput\")",
           "sensorToDashboard": "FROM /messages/modules/sensor/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/sensorInput\")",
-          "filtersensorToIoTHub": "FROM /messages/modules/filtersensor/outputs/* INTO $upstream"
+          "filtersensorToIoTHub": "FROM /messages/modules/filtersensor/outputs/* INTO $upstream",
+          "cameraToDashboard": "FROM /messages/modules/camera/outputs/* INTO BrokeredEndpoint(\"/modules/dashboard/inputs/cameraInput\")"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

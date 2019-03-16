@@ -43,7 +43,7 @@ def predict_image_handler(project=None):
         return jsonify(results)
     except Exception as e:
         print('EXCEPTION:', str(e))
-        return 'Error processing image', 500
+        return 'Error processing image' + str(e), 500
 
 
 # Like the CustomVision.ai Prediction service /url route handles url's
@@ -59,7 +59,7 @@ def predict_url_handler(project=None):
         return jsonify(results)
     except Exception as e:
         print('EXCEPTION:', str(e))
-        return 'Error processing image'
+        return 'Error processing image ' + str(e)
 
 if __name__ == '__main__':
     # Load and intialize the model

@@ -8,6 +8,8 @@ RUN npm install --production
 
 COPY app.js ./
 
+COPY data ./data/
+
 USER node
 
 CMD ["node", "app.js"]
